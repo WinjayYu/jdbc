@@ -1,1 +1,1 @@
-all of my learn jdbc's code
+some of my learn jdbc's code
