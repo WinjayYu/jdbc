@@ -1,9 +1,12 @@
 import java.sql.*;
 
+
 public class testJdbc {
 
 	/**
-	 * @param args
+	 * jdbc对mysql的select（查询）操作
+	 * author winjayyu
+	 * 2015年12月27日
 	 */
 	public static void main(String[] args) {
 		Connection conn = null;
@@ -11,11 +14,11 @@ public class testJdbc {
 		ResultSet rs = null;
 
 		  try {
-	            Class.forName("com.mysql.jdbc.Driver");
+	            Class.forName("com.mysql.jdbc.Driver");//利用Class.forName()方法来加载JDBC驱动程序（Driver）至DriverManager
 	            conn = DriverManager.getConnection(
-	            		"jdbc:mysql://localhost/test?user=root&password=helloworld");
+	            		"jdbc:mysql://localhost/test?user=root&password=helloworld");//通过JDBC URL，用户名，密码来获取相应的数据库连接
 	            stmt = conn.createStatement();
-                rs = stmt.executeQuery("select * from stu");
+                rs = stmt.executeQuery("select * from stu");//select查询的结果存放在rs中
                 while(rs.next()){
                 	System.out.print(rs.getString("name"));
                 	System.out.print(" ");
@@ -25,7 +28,22 @@ public class testJdbc {
 	        	e.printStackTrace();
 	        } catch (SQLException e) {
 	        	e.printStackTrace();
+	        }finally{
+	        	if(conn != null){
+	        		try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+	        	}
+	        	if(stmt != null) {
+	        		try {
+						stmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+	        	}
 	        }
-	}
+    }
 
 }
