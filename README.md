@@ -1,1 +1,1 @@
-some of my learn jdbc's code
+*学习JDBC时候记的笔记*
